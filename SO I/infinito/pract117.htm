@@ -1,0 +1,226 @@
+<html>
+<head>
+    <title>Sistemas Operativos I - Segunda pr&aacute;ctica evaluable (2016-17)</title>
+</head>
+<body>
+    <H1><CENTER>PR&Aacute;CTICAS DE SISTEMAS OPERATIVOS I</CENTER></H1>
+    <H2><CENTER>SEGUNDA PR&Aacute;CTICA EVALUABLE (2016-17)</CENTER></H2>
+    <H2><CENTER>Infinito</CENTER></H2>
+<HR>
+    <OL>
+        <LI><H3>Enunciado.</H3>
+            El programa que hay que presentar constar&aacute; de un &uacute;nico
+            fichero fuente de nombre <code>infinito.c</code>. La
+            correcta compilaci&oacute;n de dicho programa, producir&aacute; un
+            fichero ejecutable, cuyo nombre ser&aacute; obligatoriamente
+            <code>infinito</code>. Respetad las may&uacute;sculas/min&uacute;sculas
+            de los nombres, si las hubiere.
+            <BR><BR>
+            La ejecuci&oacute;n del programa crear&aacute; una serie de procesos
+            que se transmitir&aacute;n se&ntilde;ales entre ellos.
+            En concreto, el &aacute;rbol de procesos que hay que
+            crear es el siguiente:
+            <CENTER><IMG SRC="inf1.png"></CENTER>
+            <BR><BR>
+            Para comprender mejor el funcionamiento de la pr&aacute;ctica,
+            cambiemos la posici&oacute;n de los procesos en el dibujo de forma
+            que formen una figura semejante al s&iacute;mbolo de infinito:
+            <CENTER><IMG SRC="inf2.png"></CENTER>
+            Las
+            relaciones paterno-filiales son las indicadas por las l&iacute;neas
+            s&oacute;lidas. 
+            <BR><BR>
+            Durante treinta segundos, deben estar circulando se&ntilde;ales
+            entre los procesos en el sentido que indican las flechas rojas
+            de la figura, de modo que cuando un proceso recibe una se&ntilde;al,
+            env&iacute;a otra al siguiente proceso. El proceso padre enviar&aacute;
+            la primera se&ntilde;al para que se ponga en marcha el mecanismo.
+            El tipo de se&ntilde;al o se&ntilde;ales usadas se deja libre. El 
+            proceso padre es el que controlar&aacute; estos treinta segundos 
+            (no us&eacute;is <code>sleep</code>).
+            <BR><BR>
+            Transcurridos los treinta segundos, el proceso padre dejar&aacute; 
+            de enviar se&ntilde;ales, arbitrar&aacute; un mecanismo para que los procesos
+            mueran (o se maten), esperar&aacute;n a que hayan muerto y escribir&aacute;
+            por la salida est&aacute;ndar "La se&ntilde;al ha dado <i>x</i> vueltas.",
+            donde <i>x</i> ser&aacute; el n&uacute;mero de vueltas que ha dado la se&ntilde;al
+            a los procesos del dibujo.
+            <BR><BR>
+            Los procesos, una vez creados, deben permanecer bloqueados,
+            sin consumir CPU mientras esperan a recibir la se&ntilde;al y enviar
+            esa u otra al siguiente proceso.
+            <BR><BR>
+            Si se requiere sincronizar alguna acci&oacute;n, se pueden usar
+            se&ntilde;ales, pero la espera se debe realizar <strong>sin
+            consumo de CPU</strong>.
+            <BR><BR>
+            Para ver si hab&eacute;is conseguido crear el &aacute;rbol de procesos
+            correctamente, pod&eacute;is descargaros el siguiente ejecutable:
+            <A TYPE="application/octet-stream"
+               HREF="DOMINo/Arbol_dominO">Arbol_dominO</A>. No os va a
+            funcionar en Linux, pues es un ejecutable binario y los
+            procesadores son diferentes. 
+            Desde el servidor, para
+            ver el &aacute;rbol de procesos que hab&eacute;is generado, usad la
+            orden: <code><nobr>ps -f | grep "infinito$" | grep -v grep | sort |
+            Arbol_dominO</nobr></code>. Si os aparece el mensaje
+            "<code>&Aacute;rbol con m&uacute;ltiples ra&iacute;ces. Se aborta.</code>",
+            significa que hab&eacute;is corrido varias veces vuestra pr&aacute;ctica
+            sin matar los procesos de la anterior.
+        En el caso de Linux, pod&eacute;is usar la opci&oacute;n <code>-f</code> de la
+        orden <code>ps</code>.
+        <BR><BR>
+        <LI><H3>Restricciones</H3>
+            <UL>
+                <LI>Se deber&aacute;n usar llamadas al sistema siempre que sea
+                    posible, a no ser que se especifique lo contrario.
+                <LI>No est&aacute; permitido usar la funci&oacute;n de biblioteca
+                    <code>system</code>, salvo indicaci&oacute;n expl&iacute;cita en
+                    el enunciado de la pr&aacute;ctica.
+                <LI>Para generar el &aacute;rbol de procesos, no se usar&aacute;n 
+                    llamadas al sistema de la familia <code>exec</code>.
+                <LI>No se puede suponer que los PIDs de los procesos
+                    de una ristra van a aparecer consecutivos. Puestos
+                    en plan exquisito, ni siquiera podemos suponer que
+                    estar&aacute;n ordenados de menor a mayor (puede ocurrir
+                    que se agoten los PIDs y retome la cuenta partiendo
+                    de cero).
+                <LI>No est&aacute; permitido el uso de ficheros, tuber&iacute;as u
+                    otro mecanismo externo para transmitir informaci&oacute;n
+                    entre los procesos.
+            </UL>
+            <BR><BR>
+        <LI><H3>Plazo de presentaci&oacute;n.</H3>
+            Consultad la entrada de la p&aacute;gina web de la asignatura.
+            <BR><BR>
+        <LI><H3>Normas de presentaci&oacute;n.</H3>
+            <A HREF="normas.htm">Ac&aacute;</A> est&aacute;n.
+            <BR><BR>
+        <LI><H3>LPEs.</H3>
+            <OL type="I">
+                <LI>Las tareas que tiene que realizar el
+                    programa son variadas. Os recomiendo que vay&aacute;is
+                    program&aacute;ndolas y comprob&aacute;ndolas una a una. No es muy
+                    productivo hacer todo el programa de seguido y corregir
+                    los errores al final. El esquema que os recomiendo
+                    seguir para facilitaros la labor se os muestra a
+                    continuaci&oacute;n:
+                    <OL>
+                         <LI>Haced un peque&ntilde;o programa que cree los procesos
+                             H1, H2, H3 y H4. Compiladlo, ejecutadlo, 
+                             comprobadlo con <code>Arbol_dominO</code> y 
+                             depuradlo, si fuera necesario.
+                         <LI>Repetid el procedimiento con los procesos
+                             N2 y N3.
+                             Alternativamente, pod&eacute;is intentar generar 
+                             los procesos mediante un bucle, sin hacerlo
+                             en el c&oacute;digo expl&iacute;citamente.
+                         <LI>Una vez el &aacute;rbol est&eacute; bien generado, comprobad
+                             que los procesos no consumen CPU con
+                             <code>top</code>.
+                         <LI>Es mejor que a continuaci&oacute;n resolv&aacute;is el problema
+                             de matar a los procesos y los treinta segundos.
+                             Deb&eacute;is usar SIGALRM en el proceso padre para que,
+                             transcurridos los treinta segundos salte a la
+                             manejadora y mate todos los procesos. El esquema
+                             para que los procesos mueran lo pod&eacute;is hacer como
+                             gust&eacute;is, aunque lo m&aacute;s natural es que los padres
+                             vayan matando a los hijos y esperen por su muerte
+                             con <code>wait</code>s. De momento, que el
+                             proceso padre ponga que se han dado cero vueltas.
+                             Tambi&eacute;n, para trabajar y depurar con m&aacute;s
+                             comodidad, sustituid temporalmente los treinta
+                             segundos por cinco.
+                         <LI>Localizad en vuestro programa el c&oacute;digo que
+                             ejecuta el proceso H2. Construid para ese
+                             proceso una manejadora que intercepte 
+                             <code>SIGUSR1</code>, por ejemplo. Dentro de esa
+                             manejadora, poned un mensaje indicando que se
+                             ha recibido la se&ntilde;al. Que P le mande la se&ntilde;al a
+                             H2. Comprobad y corregid si no funciona.
+                         <LI>Localizad el c&oacute;digo de N2 y repetid lo hecho con
+                             H2 en el paso anterior. Dentro de la manejadora
+                             de H2 le envi&aacute;is la se&ntilde;al a N2. Comprobad y
+                             corregid si no funciona.
+                         <LI>Repetid el esquema para la pareja N2-H1. Aqu&iacute;
+                             os encontrar&eacute;is con un problema que deb&eacute;is
+                             discurrir c&oacute;mo resolverlo. Para que N2 mande
+                             la se&ntilde;al a H1 es necesario que conozca su PID.
+                             No pod&eacute;is usar un fichero para transmitirlo.
+                         <LI>La siguiente dificultad os la encontrar&eacute;is 
+                             cuando H4 tenga que mandar la se&ntilde;al a P, justo
+                             al final del recorrido. P debe diferenciar la
+                             se&ntilde;al que le llega de H4 de la que le llega de
+                             H1. Hay que volver a pensar.
+                         <LI>Completad la pr&aacute;ctica haciendo que el padre
+                             cuente las vueltas y completando los detalles
+                             del enunciado que os falten.
+                    </OL>
+                <LI>Para matar los procesos despu&eacute;s de cada ejecuci&oacute;n,
+                    hay una manera muy c&oacute;moda. Si hab&eacute;is usado
+                    "<code>infinito &amp;</code>" para ejecutar la pr&aacute;ctica,
+                    pod&eacute;is usar "<code>kill %</code>" para matar a todos
+                    los procesos de golpe.
+                <LI><strong>No se puede usar <code>sleep()</code> o
+                    similares para sincronizar los procesos, salvo que se indique
+                    expl&iacute;citamente en el enunciado. Hay que usar otros
+                    mecanismos.</strong>
+                <LI>Sab&eacute;is que si us&aacute;is <i>espera ocupada</i> en lugares
+                    donde expl&iacute;citamente no se haya dicho que se puede
+                    usar, la pr&aacute;ctica est&aacute; suspensa. No obstante, existe
+                    existe una variedad de espera ocupada que podr&iacute;amos
+                    denominar <i>espera semiocupada</i>. Consiste en
+                    introducir una espera de alg&uacute;n segundo en cada iteraci&oacute;n
+                    del bucle de espera ocupada. Con esto el proceso no
+                    consume tanta CPU como en la espera ocupada, pero persisten
+                    los dem&aacute;s problemas de la t&eacute;cnica del sondeo, en particular
+                    el relativo a la elecci&oacute;n del periodo de espera.
+                    Aunque la pr&aacute;ctica no estar&aacute; suspensa si hac&eacute;is espera
+                    semiocupada, se penalizar&aacute; en la nota bastante si la
+                    us&aacute;is. En conveniente que la evit&eacute;is.
+                <LI>Evitad, en lo posible, el uso de variables globales.
+                    Ten&eacute;is la posibilidad de declarar <i>variables 
+                    est&aacute;ticas</i>.
+                <LI>Tened cuidado con el uso de <code>pause()</code>.
+                    Salvo en bucles infinitos de <code>pause</code>s,
+                    su uso puede estar mal. Mirad la soluci&oacute;n a la 
+                    pr&aacute;ctica
+                    propuesta en la sesi&oacute;n d&eacute;cima acerca
+                    de &eacute;l o el siguiente LPE.
+                <LI>Es conveniente que, antes de entregar la pr&aacute;ctica,
+                    comprob&eacute;is que los <code>kill</code>s est&aacute;n enviando la
+                    se&ntilde;al a los procesos correctos. Si al imprimirlo resulta
+                    que a veces mandan la se&ntilde;al al proceso "0", es que est&aacute;
+                    mal. Lo que ocurre es que el proceso que realiza el
+                    <code>kill</code> recibe la se&ntilde;al y
+                    salta a la manejadora <i>antes de</i> actualizar la
+                    variable que contiene el pid de su hijo. Por eso la
+                    variable tiene 0. La soluci&oacute;n consiste en que el
+                    patriarca bloquee la se&ntilde;al y cada proceso la
+                    desbloquee justo antes de quedarse parado y despu&eacute;s de
+                    haber hecho todas sus tareas. 
+                <LI>El programa que he hecho se para a veces.
+                    O en mi casa se para, pero en clase, no.
+                    O en clase s&iacute;, pero en casa, no.
+                    <BR>
+                    <A HREF="stop.htm">Soluci&oacute;n</A>.
+                <LI>&iquest;Qu&eacute; hago cuando mi programa se desboca
+                    para no perjudicar el funcionamiento de la
+                    m&aacute;quina?<BR>
+                    <A HREF="demogr.htm">Soluci&oacute;n</A>.
+                <LI>La pr&aacute;ctica en ejecuci&oacute;n os va a consumir CPU. La raz&oacute;n
+                    es que las se&ntilde;ales est&aacute;n circulando sin descanso. Esto
+                    es normal siempre que teng&aacute;is bien programado el
+                    <CODE>sigsuspend</CODE>. Un efecto curioso del que se
+                    ha dado cuenta un compa&ntilde;ero es que el proceso padre
+                    consume el doble de CPU que los dem&aacute;s debido a que por
+                    &eacute;l las se&ntilde;ales pasan dos veces en una vuelta. Esto es
+                    s&iacute;ntoma de que la pr&aacute;ctica funciona.
+            </OL>
+    </OL>
+<HR>
+&copy; 2016 Guillermo Gonz&aacute;lez Talav&aacute;n y 
+Susana &Aacute;lvarez Rosado.
+<HR>
+</body>
+</html>
