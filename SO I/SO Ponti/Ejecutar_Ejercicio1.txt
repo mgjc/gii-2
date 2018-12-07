@@ -1,0 +1,1 @@
+gcc Ejercicio1.c -pthread -o Ejercicio1

@@ -1,0 +1,1 @@
+gcc Ejercicio2.c -o Ejercicio2
